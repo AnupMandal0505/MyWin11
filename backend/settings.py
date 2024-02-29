@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 
 # DEBUG = os.getenv('DEBUG')
 # SECRET_KEY = os.getenv('SECRET_KEY')
@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-3zem-twa*pdw1e5x#$y82dn*f4)sc90%a^a-qk=nc!ywk*xp+y
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['medx-z7bs.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mywin11.onrender.com', '127.0.0.1']
 
 
 # Application definition
