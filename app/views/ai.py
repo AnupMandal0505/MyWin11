@@ -18,11 +18,11 @@ class PostListCreateAPIView(APIView):
                 return Response({'error': 'Invalid JSON data'}, status=400)
 
             # Extract the TeamA and TeamB data from the JSON
-            TeamA = data.get('TeamA', [])
-            TeamB = data.get('TeamB', [])
+            TeamA = data.get('selectedPlayerA', [])
+            TeamB = data.get('selectedPlayerB', [])
 
             data=predict_ml(TeamA,TeamB)
-        return Response(data, status=status.HTTP_302_FOUND)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 def predict_ml(TeamA,TeamB):
@@ -120,7 +120,8 @@ def predict_ml(TeamA,TeamB):
             diff -= 1
 
 
-    output = InD11[:11]           
+    output = InD11[:11]    
+    # print(output)       
     return output
     # return Response(output, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
