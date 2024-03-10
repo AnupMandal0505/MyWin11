@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'css/dropna.css' %}" rel="stylesheet">
+{% endblock head %}
+
+
+
+{% block sidebar %}
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Columns</a>
+        <div class="dropdown-menu bg-transparent border-0">
+            <a href="/delete_columns/{{id}}" class="dropdown-item">Delete</a>
+            <a href="/rename_columns/{{id}}" class="dropdown-item">Rename</a>
+        </div>
+    </div>
+
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>NA Values</a>
+        <div class="dropdown-menu bg-transparent border-0">
+            <a href="/fillna/{{id}}" class="dropdown-item">Fill NA</a>
+            <a href="/dropna/{{id}}" class="dropdown-item">Drop NA</a>
+        </div>
+    </div>
+{% endblock sidebar %}
+
+
+{% block body %}
+<div class="container">
+    <h2>Multi-select Options</h2>
+    <form id="option-form" method="POST" action="/dropna/{{id}}/">
+{% csrf_token %}
+    <ul class="option-list">
+        {% for key in data.0.keys %}
+        <li><label><input type="checkbox" name="fillna" value="{{key}}"> {{key}} </label></li>
+        {% endfor %}
+    </ul>
+    <button type="button" id="select-all-btn">Select All</button>
+    <button type="button" id="clear-selection-btn">Clear Selection</button>
+    <br>
+    <button  type="submit" id="submit-btn">Submit</button>
+</form>
+
+</div>
+{% endblock body %}
+
+{% block script %}
+<script>
+    document.getElementById('select-all-btn').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        var checkboxes = document.querySelectorAll('.option-list input[type="checkbox"]');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = true;
+        });
+    });
+    
+    document.getElementById('clear-selection-btn').addEventListener('click', function() {
+        var checkboxes = document.querySelectorAll('.option-list input[type="checkbox"]');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+    });
+
+</script>
+{% endblock script %}
+
+

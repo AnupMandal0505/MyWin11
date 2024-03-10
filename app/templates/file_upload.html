@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload CSV File</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.file-upload {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload label {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.file-upload label:hover {
+    background-color: #45a049;
+}
+
+.submit-btn {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.submit-btn button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+{% comment %} .dashboard-btn {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.dashboard-btn a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-btn a:hover {
+    background-color: #0056b3;
+} {% endcomment %}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Upload a CSV File</h2>
+
+    <form id="uploadForm" action="upload_csv" method="post" enctype="multipart/form-data"> <!-- Adjust action attribute as needed -->
+        {% csrf_token %}
+        <div class="file-upload">
+            <input type="file" id="csvFileInput" name="csv_file" accept=".csv">
+            <label for="csvFileInput">Choose CSV File</label>
+        </div>
+
+        <div id="fileStatus"></div>
+
+        <div class="submit-btn">
+            <button type="submit" id="submitButton" disabled>Submit</button>
+        </div>
+    </form>
+
+    <!-- Dashboard button -->
+    {% comment %} <div class="dashboard-btn">
+        <a href="dasboard">Go to Dashboard</a>
+    </div> {% endcomment %}
+
+    <script>
+    document.getElementById('csvFileInput').addEventListener('change', function() {
+        const file = this.files[0];
+        const fileType = file.type;
+        const validExtensions = ['text/csv', 'application/vnd.ms-excel']; // Define CSV file types
+        
+        // Check if the file type is CSV
+        if (validExtensions.includes(fileType)) {
+            document.getElementById('fileStatus').innerText = 'File is a CSV.';
+            document.getElementById('submitButton').disabled = false; // Enable the submit button
+        } else {
+            document.getElementById('fileStatus').innerText = 'File is not a CSV.';
+            document.getElementById('submitButton').disabled = true; // Disable the submit button
+        }
+    });
+    </script>
+</div>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ urlpatterns = [
     path("get_user",get_user.GetUser, name="get_user"),
     path('login', signin.LoginAPI.as_view(), name='login'),
     path('logout', signout.LogoutAPI.as_view(), name='login'),
-    path('MyWin11', ai.PostListCreateAPIView.as_view(), name='post-list-create'),
+    path('MyWin11', ai.PostListCreateAPIView.as_view(), name='MyWin11'),
 
 ]
 

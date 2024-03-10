@@ -1,0 +1,51 @@
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.option-list li {
+    margin-bottom: 10px;
+}
+
+label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#select-all-btn, #clear-select-btn {
+    margin-bottom: 10px;
+}
+
+#submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#submit-btn:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">{% endblock head %}
+{% block body %}
+<h2>History</h2>
+<table id="example" class=".table-hover table table-dark table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>User</th>
+            <th>File_description</th>
+            <th>Action</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td><i class="fas fa-file"></i></td>
+            <td>{{ row.user }}</td>
+            <td>{{ row.File_description }}</td>
+            <td><a href="show_data/{{row.id}}"><i class="fas fa-database"></i></a></td>
+            <td><a href="{{row.id }}"><i class="fas fa-edit"></i></a></td>
+            <td><a href="delete_file/{{row.id}}" onclick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% comment %} <a href="delete_columns" class="btn btn-danger mt-3">Delete Columns</a>
+<a href="rename_columns" class="btn btn-danger mt-3">Columns Name Replace</a> {% endcomment %}
+
+{% endblock body %}

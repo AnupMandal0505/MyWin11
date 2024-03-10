@@ -33,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3zem-twa*pdw1e5x#$y82dn*f4)sc90%a^a-qk=nc!ywk*xp+y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['mywin11.onrender.com', '127.0.0.1']
@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
+    'corsheaders',
+
 ]
 
 
@@ -107,12 +109,22 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",  # Add your frontend origin
+    "https://mywin11.onrender.com",
+    "http://localhost:3000",
+    # Add more origins as needed
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -180,8 +192,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
+STATIC_URL = '/static/'
+# STATIC_ROOT = BASE_DIR / 'collectstatic'
 
-STATIC_URL = 'static/'
+# Define the location of static files for development
+STATIC_ROOT =  BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+# Whitenoise configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
